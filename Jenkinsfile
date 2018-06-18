@@ -30,6 +30,6 @@ def buildAndRegisterDockerImage() {
         echo "Register image at local registry"
         buildResult.push()
         echo "Disconnect from registry"
-        sh "docker logout "10.130.2.201:8081""
+        sh "docker logout 10.130.2.201:8081"
     }
 }
