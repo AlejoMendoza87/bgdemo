@@ -1,2 +1,2 @@
-requirements\Werkzeug-0.14.1.tar.gz
-requirements\Flask-1.0.2.tar.gz
+Werkzeug-0.14.1.tar.gz
+Flask-1.0.2.tar.gz
