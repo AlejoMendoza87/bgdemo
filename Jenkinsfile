@@ -30,7 +30,7 @@ def buildAndRegisterDockerImage() {
         echo "Building ${env.IMAGE_NAME}"
         buildResult = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
         echo "Register ${env.IMAGE_NAME} at ${env.REGISTRY_URL}"
-        buildResult.push(                              )
+        buildResult.push("${env.BUILD_ID}")
         echo "Disconnect from registry"
         sh "docker logout ${env.REGISTRY_URL}"
     }
