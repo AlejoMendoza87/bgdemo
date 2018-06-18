@@ -7,6 +7,10 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
+      stage("Initialize environment") {
+          agent any
+          steps { initialize() }
+      }
         stage("Build and Register Image") {
             agent any
             steps { buildAndRegisterDockerImage() }
@@ -23,7 +27,7 @@ def initialize() {
 def buildAndRegisterDockerImage() {
     def buildResult
     docker.withRegistry("${env.REGISTRY_URL}","${env.REGISTRY_CREDENTIALS}") {
-        echo "Build ${env.IMAGE_NAME}"
+        echo "Building ${env.IMAGE_NAME}"
         buildResult = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
         //sh "docker tag ${env.REGISTRY_URL}"
         echo "Register ${env.IMAGE_NAME} at ${env.REGISTRY_URL}"
