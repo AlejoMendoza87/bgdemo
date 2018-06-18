@@ -22,13 +22,14 @@ def initialize() {
 
 def buildAndRegisterDockerImage() {
     def buildResult
-    docker.withRegistry(env.REGISTRY_URL, env.REGISTRY_CREDENTIALS) {
-        echo "Build ${env.IMAGE_NAME}"
-        buildResult = docker.build(env.IMAGE_NAME)
-//      buildResult = docker.build(env.IMAGE_NAME:env.BUILD_ID)
-        echo "Register ${env.IMAGE_NAME} at ${env.REGISTRY_URL}"
+//  docker.withRegistry(env.REGISTRY_URL, env.REGISTRY_CREDENTIALS) {
+    docker.withRegistry("10.130.2.201:8081", "nexus-qa") {
+        echo "Build image"
+//      buildResult = docker.build(env.IMAGE_NAME)
+        buildResult = docker.build("bgdemo")
+        echo "Register image at local registry"
         buildResult.push()
         echo "Disconnect from registry"
-        sh "docker logout ${env.REGISTRY_URL}"
+        sh "docker logout "10.130.2.201:8081""
     }
 }
